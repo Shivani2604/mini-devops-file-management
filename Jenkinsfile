@@ -3,15 +3,15 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/Shivani2604/mini-devops-file-management.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t file-management-app .'
+            }
+        }
+
+        stage('Remove Old Container') {
+            steps {
+                bat 'docker rm -f file-container || exit 0'
             }
         }
 
