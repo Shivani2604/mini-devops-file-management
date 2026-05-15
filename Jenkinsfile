@@ -9,15 +9,21 @@ pipeline {
             }
         }
 
-        stage('Run PowerShell Script') {
+        stage('Build Docker Image') {
             steps {
-                powershell './scripts/file-management.ps1'
+                bat 'docker build -t file-management-app .'
             }
         }
 
-        stage('Show Report') {
+        stage('Run Docker Container') {
             steps {
-                powershell 'Get-Content Reports/report.txt'
+                bat 'docker run --name file-container file-management-app'
+            }
+        }
+
+        stage('Show Running Containers') {
+            steps {
+                bat 'docker ps -a'
             }
         }
     }
