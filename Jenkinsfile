@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Show Running Containers') {
+        stage('Show Containers') {
             steps {
                 bat 'docker ps -a'
             }
